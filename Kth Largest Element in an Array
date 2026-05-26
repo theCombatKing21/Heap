@@ -1,0 +1,58 @@
+
+    public static int findKthLargest(int[] nums, int k) {
+
+        // Min heap
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+        for (int num : nums) {
+
+            // Add current number
+            minHeap.offer(num);
+
+            // Keep only k largest elements
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+
+        // Heap top = kth largest
+        return minHeap.peek();
+    }
+
+MOST IMPORTANT INTUITION
+
+Heap never stores all elements.
+
+It only stores:
+
+best k candidates
+
+Small elements get kicked out immediately.
+
+Why Heap Size Exactly k?
+
+Because we only care about kth largest.
+
+If heap grows beyond k:
+
+remove smallest useless element
+
+Complexity
+---------------
+We process:
+
+n elements
+
+Each insertion/removal:
+
+O(log k)
+
+Total:
+
+O(n log k)
+
+Much better than:
+
+O(n log n)
+
+when k is small.
